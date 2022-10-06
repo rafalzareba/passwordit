@@ -66,13 +66,13 @@ class CustomerSearch extends CustomerModel
             'status' => $this->status,
         ]);
 
-        if (!empty($model->created_at)) {
-            $date = explode(' - ', $model->created_at);
-        }
+        if (!empty($this->created_at)) {
+            $date = explode(' - ', $this->created_at);
 
-        if (!empty($date)) {
-            $date[1] = $date[1] ?? $date[0];
-            $query->andFilterWhere(['between', 'created_at', strtotime($date[0]), strtotime($date[1]) + 86400]);
+            if (!empty($date)) {
+                $date[1] = $date[1] ?? $date[0];
+                $query->andFilterWhere(['between', 'created_at', strtotime($date[0]), strtotime($date[1])]);
+            }
         }
 
         $query->andFilterWhere(['like', 'first_name', $this->first_name])
