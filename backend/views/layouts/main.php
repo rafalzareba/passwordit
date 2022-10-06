@@ -4,8 +4,10 @@ use backend\assets\AppAsset;
 use common\widgets\Alert;
 use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
+use yii\bootstrap5\Modal;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use yii\helpers\Url;
 use yii\web\View;
 
 /** @var View $this */
@@ -23,8 +25,13 @@ AppAsset::register($this);
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
-    <body class="d-flex flex-column h-100">
+    <body class="page-loading-enabled d-flex flex-column h-100">
     <?php $this->beginBody() ?>
+
+    <div class="page-loader flex-column">
+        <span class="spinner-border text-primary fs-6 w-50px h-50px" role="status"></span>
+        <span class="text-dark fs-4 mt-3">Ładuję...</span>
+    </div>
 
     <header>
         <?php
@@ -36,7 +43,8 @@ AppAsset::register($this);
             ],
         ]);
         $menuItems = [
-            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Główna', 'url' => ['/site/index']],
+            ['label' => 'Klienci CRUD', 'url' => ['/customer/index']],
         ];
         if (Yii::$app->user->isGuest) {
             $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
@@ -62,13 +70,28 @@ AppAsset::register($this);
     <main role="main" class="flex-shrink-0">
         <div class="container">
             <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                'homeLink' => [
+                    'label' => 'Główna',
+                    'url' => Url::to('/')
+                ],
+                'links' => $this->params['breadcrumbs'] ?? [],
             ]) ?>
             <?= Alert::widget() ?>
             <?= $content ?>
         </div>
     </main>
-
+    <?php Modal::begin([
+        "id" => "ajaxCrudModal",
+        "footer" => "",// always need it for jquery plugin
+        "options" => [
+            'tabindex' => false
+        ],
+        'clientOptions' => [
+            'backdrop' => 'static',
+            //'keyboard' => false
+        ]
+    ]) ?>
+    <?php Modal::end(); ?>
     <?php $this->endBody() ?>
     </body>
     </html>

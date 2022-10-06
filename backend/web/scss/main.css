@@ -80,6 +80,35 @@ a.desc:after {
     padding: 10px 0;
   }
 }
+.page-loading * {
+  transition: none !important;
+}
+
+.page-loader {
+  background: #ffffff9c;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1080;
+  display: none;
+}
+.page-bg-transparent .page-loader {
+  background: rgba(255, 255, 255, 0.6);
+}
+.page-loading .page-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.page-loader .w-50px {
+  width: 50px;
+}
+.page-loader .h-50px {
+  height: 50px;
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -11765,7 +11794,6 @@ textarea.form-control-lg {
     padding-left: 3rem !important;
   }
 
-  
   .gap-xxl-0 {
     gap: 0 !important;
   }

@@ -97,3 +97,42 @@ a {
     padding: 10px 0;
   }
 }
+
+
+// CSS3 Transitions only after page load(.page-loading class added to body tag and remove with JS on page load)
+.page-loading * {
+  transition: none !important;
+}
+
+// Base
+.page-loader {
+  background: #ffffff9c;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1080;
+  display: none;
+
+  .page-bg-transparent & {
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  .page-loading & {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .w-50px {
+    width: 50px;
+  }
+  .h-50px {
+    height: 50px;
+  }
+
+
+
+}

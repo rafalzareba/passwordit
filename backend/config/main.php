@@ -1,6 +1,7 @@
 <?php
 
 use common\models\User;
+use kartik\grid\Module;
 use yii\bootstrap5\BootstrapAsset;
 use yii\bootstrap5\BootstrapPluginAsset;
 use yii\log\FileTarget;
@@ -23,7 +24,11 @@ return [
     'language' => 'pl-PL',
     'sourceLanguage' => 'pl-PL',
     'timeZone' => 'Europe/Warsaw',
-    'modules' => [],
+    'modules' => [
+        'gridview' => [
+            'class' => Module::class
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-2a23fDaF9',
@@ -47,6 +52,19 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+        'formatter' => [
+            'defaultTimeZone' => 'Europe/Warsaw',
+            'timeZone' => 'Europe/Warsaw',
+            'locale' => 'pl-PL',
+            'dateFormat' => 'dd.MM.yyyy',
+            'timeFormat' => 'HH:mm:ss',
+            'datetimeFormat' => 'dd.MM.yyyy HH:mm',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => 'PLN',
+            'sizeFormatBase' => 1000,
+            'nullDisplay' => '',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
